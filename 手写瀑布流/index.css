@@ -1,0 +1,11 @@
+.content{
+  background-color: #f5f5ff;
+  position: relative;
+}
+html,body{
+  padding: 0;
+  margin: 0;
+}
+.content img{
+  position: absolute;
+}
