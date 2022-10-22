@@ -15,7 +15,7 @@ class Lpromise{
       queueMicrotask(()=>{
         this.value=value
         for(let fn of this.onFulfilled){
-          fn()
+          fn(this.value)
         }
       })
       console.log('resolve执行');
@@ -43,38 +43,92 @@ class Lpromise{
    
     return new Lpromise((resolve,reject)=>{
       if(this.status===PENDING){
-        console.log(55555);
         this.onFulfilled.push(()=>{
-          const res=success(this.value)
-          resolve(res)
+          try{
+            const res=success(this.value)
+            resolve(res)
+          }
+          catch(err){
+            reject(err)
+          }
+
         })
         this.onRejected.push(()=>{
+          try{
           const res=err(this.reason)
           resolve(res)
+        }
+        catch(err){
+          reject(err)
+        }
         })
       }
       if(this.status===FULFILLED){
         this.onFulfilled.push(()=>{
-          const res=success(this.value)
-          resolve(res)
+          try{
+            const res=success(this.value)
+            resolve(res)
+          }
+          catch(err){
+            reject(err)
+          }
         })
       }
       if(this.status===REJECTED){
         this.onRejected.push(()=>{
-          const res=err(this.reason)
-          resolve(res)
+          try{
+            const res=err(this.reason)
+            resolve(res)
+          }
+          catch(err){
+            reject(err)
+          }
         })
       }
     })
   }
+  catch(err){
+    return this.then(undefined,err)
+  }
+  finally(callback){
+    return this.then(callback,callback)
+  }
+  static all(promiseArr){
+    return new Promise((resolve,reject)=>{
+    let res=[]
+    promiseArr.forEach(item => {
+      item.then(result=>{
+        res.push(result)
+        if(res.length==promiseArr.length) resolve(res)
+      }).catch(err=>{console.log(err)})
+
+    }); 
+    })
+  }
 }
-const p1=new Lpromise((resolve,reject)=>{
-  resolve('哈哈哈哈')
-  reject('222')
+// const p1=new Lpromise((resolve,reject)=>{
+//   reject('222')
+// })
+// p1.then((res)=>{
+//   console.log(res);
+//   return res+'链式调用'
+// }).catch(err=>{
+//   console.log(err);
+// })
+const pp1=new Lpromise((resolve,reject)=>{
+  resolve(111)
 })
-p1.then((res)=>{
+const pp2=new Lpromise((resolve,reject)=>{
+  setTimeout(()=>{
+  resolve(222)
+
+  },3000)
+})
+const pp3=new Lpromise((resolve,reject)=>{
+  resolve(3)
+})
+Lpromise.all([pp1,pp2,pp3]).then(res=>{
   console.log(res);
-  return res+'链式调用'
-}).then((res)=>{
-  console.log(res);
+},err=>{
+  console.log(err);
 })

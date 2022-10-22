@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+  <button onclick="rdColor()">切换颜色</button>
+  <div class="box" style="width: 200px;height: 200px;"></div>
+</body>
+<script>
+ function rdColor(){
+  let pre='rgb('
+  let i=3
+  while(i){
+    pre+=`${Math.floor(Math.random()*256)}${i==1?'':','}`
+    i--
+  }
+  pre+=')'
+  console.log(pre);
+  document.querySelector('.box').style.backgroundColor=pre 
+ }
+</script>
+</html>
