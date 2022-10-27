@@ -105,6 +105,11 @@ class Lpromise{
     }); 
     })
   }
+  static resolve(res){
+    return new Lpromise(resolve=>{
+      resolve(res)
+    })
+  }
 }
 // const p1=new Lpromise((resolve,reject)=>{
 //   reject('222')
@@ -115,20 +120,37 @@ class Lpromise{
 // }).catch(err=>{
 //   console.log(err);
 // })
-const pp1=new Lpromise((resolve,reject)=>{
-  resolve(111)
-})
-const pp2=new Lpromise((resolve,reject)=>{
-  setTimeout(()=>{
-  resolve(222)
+// const pp1=new Lpromise((resolve,reject)=>{
+//   resolve(111)
+// })
+// const pp2=new Lpromise((resolve,reject)=>{
+//   setTimeout(()=>{
+//   resolve(222)
 
-  },3000)
+//   },3000)
+// })
+// const pp3=new Lpromise((resolve,reject)=>{
+//   resolve(3)
+// })
+// Lpromise.all([pp1,pp2,pp3]).then(res=>{
+//   console.log(res);
+// },err=>{
+//   console.log(err);
+// })
+// let p1=new lpromise((resolve,reject)=>{
+//   setTimeout(()=>{
+//     resolve(12)
+//   },10000)
+// })
+
+let p1=new Lpromise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve(12)
+  },1000)
 })
-const pp3=new Lpromise((resolve,reject)=>{
-  resolve(3)
-})
-Lpromise.all([pp1,pp2,pp3]).then(res=>{
+Lpromise.resolve(p1).then(res=>{
   console.log(res);
-},err=>{
-  console.log(err);
+  res.then(res=>{
+    console.log(res);
+  })
 })
