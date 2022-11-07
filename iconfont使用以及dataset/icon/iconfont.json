@@ -1,0 +1,30 @@
+{
+  "id": "3734757",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "32276775",
+      "name": "恐龙",
+      "font_class": "konglong",
+      "unicode": "e6eb",
+      "unicode_decimal": 59115
+    },
+    {
+      "icon_id": "32276782",
+      "name": "电话",
+      "font_class": "dianhua",
+      "unicode": "e6ec",
+      "unicode_decimal": 59116
+    },
+    {
+      "icon_id": "32276783",
+      "name": "沙滩球",
+      "font_class": "shatanqiu",
+      "unicode": "e6ed",
+      "unicode_decimal": 59117
+    }
+  ]
+}

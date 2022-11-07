@@ -9,9 +9,8 @@ createDOM(imgArr).then((res)=>{
 const img=document.querySelectorAll('img')
   console.log(img[0].clientHeight);
 })
-setTimeout(()=>{
-  onloadChang()
-})
+  
+  window.onload=onloadChang()
 
 
 async function onloadChang(){

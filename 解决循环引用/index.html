@@ -8,5 +8,11 @@
 </head>
 <body>
   <script src="./index.js"></script>
+  <script>
+
+    queueMicrotask(()=>{
+      console.log(222);
+    })
+  </script>
 </body>
 </html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="./icon/demo.css">
+<link rel="stylesheet" href="./icon/iconfont.css">
+<style>
+  h1 {
+    margin: 0;
+}
+
+ul {
+    margin: 10px 0 0;
+}
+
+li {
+    position: relative;
+    width: 200px;
+    padding-bottom: 10px;
+}
+
+li:after {
+    content: 'Data ID: ' attr(data-ll);
+    position: absolute;
+    top: -22px;
+    left: 10px;
+    background: black;
+    color: white;
+    padding: 2px;
+    border: 1px solid #eee;
+    opacity: 0;
+    transition: 0.5s opacity;
+}
+
+li:hover:after {
+    opacity: 1;
+}
+</style>
+<body>
+  <h1>Secret agents</h1>
+  <span class="iconfont">&#xe6eb;</span>
+  <span class="iconfont icon-konglong"></span>
+  <span class="iconfont icon-shatanqiu"></span>
+  <svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-shatanqiu"></use>
+  </svg>
+  <ul onclick="ff(event)" data-ula="12">
+      <li data-ll="red" data-id="10784">Jason Walters, 003: Found dead in "A View to a Kill".</li>
+      <li data-ll="red" data-id="97865">Alex Trevelyan, 006: Agent turned terrorist leader; James' nemesis in "Goldeneye".</li>
+      <li data-id="pink">James Bond, 007: The main man; shaken but not stirred.</li>
+  </ul>
+  <script>
+    function ff(e){
+    console.log(e.target.dataset.ll=Math.random())
+  }
+  </script>
+</body>
+<script src="./icon//iconfont.js"></script>
+<script type='module'>
+  
+// 现在使用，可以直接在顶层使用
+console.log(this);
+fn()
+function fn(){
+  console.log(this);
+}
+const fun = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(333333);
+      resolve();
+    }, timeout);
+  });
+};
+
+await fun(3000);
+</script>
+</html>
