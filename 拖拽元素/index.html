@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body{
+    background-color: #f6e9d6;
+  }
+  .list li{
+    background-color: pink;
+    color: white;
+    margin: 5px 0;
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+  }
+  .list .move{
+    background: transparent;
+    color: transparent;
+    outline: 3px solid red;
+  }
+</style>
+<body>
+  <ul class="list">
+    <li draggable="true">1</li>
+    <li draggable="true">2</li>
+    <li draggable="true">3</li>
+    <li draggable="true">4</li>
+    <li draggable="true">5</li>
+  </ul>
+  <script src="../封装flip动画/js/flip.js"></script>
+  <script>
+    let current
+    let li=document.querySelector('.list')
+    //开始拖动事件
+    li.ondragstart=(e)=>{
+      requestAnimationFrame(() => {
+        e.target.classList.add('move')
+      });
+      e.dataTransfer.effectAllowed='move'//默认鼠标拖动时候图标是复制，把他改成移动
+      current=e.target
+    }
+    //当某被拖动的对象在另一对象容器范围内拖动时触发此事件
+    li.ondragover=(e)=>{
+      e.preventDefault();
+    }
+    //当被鼠标拖动的对象进入其容器范围内时触发此事件
+    li.ondragenter=(e)=>{
+      e.preventDefault();
+      if(e.target==current||e.target==li) return
+      const children=[...li.children]
+      let filp=new Flip(children,0.3)
+      const targetIndex=children.indexOf(e.target)
+      const currentIndex=children.indexOf(current)
+      if(targetIndex>currentIndex) li.insertBefore(e.target,current)
+      if(targetIndex<currentIndex) li.insertBefore(current,e.target)
+      filp.play()
+    }
+    li.ondragend=(e)=>{
+      e.target.classList.remove('move')
+    }
+
+
+  </script>
+</body>
+</html>
