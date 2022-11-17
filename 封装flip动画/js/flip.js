@@ -84,6 +84,7 @@
     }
 
     play() {
+      let t1=new Date().getTime()
       let gs = [...this.flipDoms]
         .map((it) => {
           const generator = it.play();
@@ -101,6 +102,12 @@
          * 浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阈值，
          * 才清空队列。但是！当你获取布局信息的操作的时候，会强制队列刷新
          */
+        let t2=new Date().getTime()
+        console.log(t1);
+        console.log(t2);
+        console.log('执行代码的间隔: '+(t2-t1));
+        console.log('执行代码的间隔没有超过16.7ms所以需要clientWidth来触发浏览器画面渲染')
+
         document.body.clientWidth;
         gs = gs
           .map((g) => {

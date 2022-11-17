@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box{
+    background-color: pink;
+    width: 30%;
+  }
+</style>
+<body>
+  <button onclick="sizeIncrease('width')">宽变大</button>
+  <button onclick="sizedecrease('width')">宽变小</button>
+  <button onclick="sizeIncrease('height')">高变大</button>
+  <button onclick="sizedecrease('height')">高变小</button>
+
+
+  <div class="box" ></div>
+  <script src="./index.js"></script>
+  <script>
+    let el=document.querySelector('.box')
+    function sizeIncrease(wh){
+      let whValue
+      if(wh=='width'){
+        whValue=el.clientWidth
+        el.style.width=(whValue+=100)+'px' 
+      }
+      else if(wh=='height'){
+        whValue=el.clientHeight
+        el.style.height=(whValue+=100)+'px' 
+      }
+           
+    }
+    function sizedecrease(wh){
+      let whValue
+      if(wh=='width'){
+        whValue=el.clientWidth
+        el.style.width=(whValue-=100)+'px' 
+      }
+      else if(wh=='height'){
+        whValue=el.clientHeight
+        el.style.height=(whValue-=100)+'px' 
+      }      
+    }
+    let observer=new ElementObserver(el)
+    let fn1=1,fn2=2,fn3=3
+
+    observer.pushCallback((event)=>{
+      console.log('变化了，目前是'+'width:'+el.clientWidth+'; '+'height:'+el.clientHeight);
+    })
+  </script>
+</body>
+</html>
